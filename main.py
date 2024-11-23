@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+from src.auth.routes import router as auth_router
 from src.contacts.routes import router as contacts_router
 from src.contacts.routes import unexpected_exception_handler
 
@@ -11,5 +12,6 @@ async def healthcheck():
     return {"message": "Welcome to FastAPI!"}
 
 
+app.include_router(auth_router, prefix="/auth", tags=["auth"])
 app.include_router(contacts_router, prefix="/contacts", tags=["contacts"])
 app.add_exception_handler(Exception, unexpected_exception_handler)
