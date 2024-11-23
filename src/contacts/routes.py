@@ -5,8 +5,10 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from config.db import get_db
+from src.auth.models import User
 from src.contacts.repos import ContactRepository
 from src.contacts.schema import Contact, ContactCreate, ContactResponse, ContactUpdate
+from src.auth.utils import get_current_user
 
 router = APIRouter()
 
@@ -18,14 +20,15 @@ async def unexpected_exception_handler(request: Request, exc: Exception):
     )
 
 
-@router.post("/", response_model=ContactResponse)
+@router.post("/", response_model=ContactResponse, status_code=status.HTTP_201_CREATED)
 async def create_contact(
-    contact: ContactCreate, db: AsyncSession = Depends(get_db)
+    contact: ContactCreate,
+    user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db)
 ) -> Contact:
     contact_repo = ContactRepository(db)
     try:
-        new_contact = await contact_repo.create_contact(contact)
-        return new_contact
+        return await contact_repo.create_contact(contact, user.id)
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(e))
 
@@ -34,10 +37,11 @@ async def create_contact(
 async def get_contacts(
     offset: int = 0,
     limit: int = Query(default=10, le=100, ge=10),
+    user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
     contact_repo = ContactRepository(db)
-    contacts = await contact_repo.get_contacts(offset, limit)
+    contacts = await contact_repo.get_contacts(user.id, offset, limit)
     if not contacts:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Contacts not found"

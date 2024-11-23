@@ -12,8 +12,8 @@ class ContactRepository:
     def __init__(self, session):
         self.session = session
 
-    async def create_contact(self, contact: ContactCreate) -> Contact:
-        new_contact = Contact(**contact.model_dump())
+    async def create_contact(self, contact: ContactCreate, owner_id: int) -> Contact:
+        new_contact = Contact(**contact.model_dump(), owner_id=owner_id)
         try:
             self.session.add(new_contact)
             await self.session.commit()
@@ -27,8 +27,8 @@ class ContactRepository:
         result = await self.session.execute(query)
         return result.scalar_one_or_none()
 
-    async def get_contacts(self, offset: int, limit: int) -> List[Contact]:
-        query = select(Contact).offset(offset).limit(limit)
+    async def get_contacts(self, owner_id: int, offset: int, limit: int) -> List[Contact]:
+        query = select(Contact).where(Contact.owner_id == owner_id).offset(offset).limit(limit)
         result = await self.session.execute(query)
         return result.scalars().all()
 
