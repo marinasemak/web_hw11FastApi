@@ -6,9 +6,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from config.db import get_db
 from src.auth.models import User
-from src.contacts.repos import ContactRepository
-from src.contacts.schema import Contact, ContactCreate, ContactResponse, ContactUpdate
 from src.auth.utils import get_current_user
+from src.contacts.repos import ContactRepository
+from src.contacts.schema import (Contact, ContactCreate, ContactResponse,
+                                 ContactUpdate)
 
 router = APIRouter()
 
@@ -24,7 +25,7 @@ async def unexpected_exception_handler(request: Request, exc: Exception):
 async def create_contact(
     contact: ContactCreate,
     user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
 ) -> Contact:
     contact_repo = ContactRepository(db)
     try:
@@ -52,10 +53,11 @@ async def get_contacts(
 @router.get("/search", response_model=ContactResponse)
 async def search_contact(
     param: str = Query(description="Search by first name or last name or email"),
+    user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
     contact_repo = ContactRepository(db)
-    contact = await contact_repo.search_contacts(param)
+    contact = await contact_repo.search_contacts(user.id, param)
     if not contact:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Contacts not found"
@@ -64,12 +66,14 @@ async def search_contact(
 
 
 @router.get("/upcomingBirthdays", response_model=List[ContactResponse])
-async def get_upcoming_birthdays(db: AsyncSession = Depends(get_db)):
+async def get_upcoming_birthdays(
+    user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)
+):
     """
     Gives the list of contacts with upcoming birthdays within the next 7 days
     """
     contact_repo = ContactRepository(db)
-    contact = await contact_repo.get_upcoming_birthdays()
+    contact = await contact_repo.get_upcoming_birthdays(user.id)
     if not contact:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Contacts not found"
@@ -78,9 +82,13 @@ async def get_upcoming_birthdays(db: AsyncSession = Depends(get_db)):
 
 
 @router.get("/{contact_id}", response_model=ContactResponse)
-async def get_contact(contact_id: int, db: AsyncSession = Depends(get_db)) -> Contact:
+async def get_contact(
+    contact_id: int,
+    user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+) -> Contact:
     contact_repo = ContactRepository(db)
-    contact = await contact_repo.get_contact(contact_id)
+    contact = await contact_repo.get_contact(user.id, contact_id)
     if not contact:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Contact not found"
@@ -90,11 +98,14 @@ async def get_contact(contact_id: int, db: AsyncSession = Depends(get_db)) -> Co
 
 @router.put("/{contact_id}", response_model=ContactResponse)
 async def update_contact(
-    contact_id: int, contact: ContactUpdate, db: AsyncSession = Depends(get_db)
+    contact_id: int,
+    contact: ContactUpdate,
+    user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
 ) -> Contact:
     contact_repo = ContactRepository(db)
     try:
-        contact = await contact_repo.update_contact(contact_id, contact)
+        contact = await contact_repo.update_contact(user.id, contact_id, contact)
         if not contact:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND, detail="Contact not found"
@@ -105,9 +116,13 @@ async def update_contact(
 
 
 @router.delete("/{contact_id}", response_model=ContactResponse)
-async def delete_contact(contact_id: int, db: AsyncSession = Depends(get_db)):
+async def delete_contact(
+    contact_id: int,
+    user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
     contact_repo = ContactRepository(db)
-    contact = await contact_repo.remove_contact(contact_id)
+    contact = await contact_repo.remove_contact(user.id, contact_id)
     if not contact:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Contact not found"

@@ -1,13 +1,14 @@
+from datetime import datetime, timedelta, timezone
+
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from datetime import datetime, timedelta, timezone
-from config.general import settings
-from jose import jwt, JWTError
+from jose import JWTError, jwt
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from config.db import get_db
+from config.general import settings
 from src.auth.models import User
 from src.auth.repos import UserRepository
-from config.db import get_db
 from src.auth.schema import TokenData
 
 ALGORITHM = "HS256"
@@ -16,6 +17,7 @@ REFRESH_TOKEN_EXPIRE_DAYS = 7
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
 
+
 def create_access_token(data: dict):
     to_encode = data.copy()
     expire = datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
@@ -23,12 +25,14 @@ def create_access_token(data: dict):
     encoded_jwt = jwt.encode(to_encode, settings.secret_key, algorithm=ALGORITHM)
     return encoded_jwt
 
+
 def create_refresh_token(data: dict):
     to_encode = data.copy()
     expire = datetime.now(timezone.utc) + timedelta(days=REFRESH_TOKEN_EXPIRE_DAYS)
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, settings.secret_key, algorithm=ALGORITHM)
     return encoded_jwt
+
 
 def decode_access_token(token: str) -> TokenData | None:
     try:
@@ -40,17 +44,20 @@ def decode_access_token(token: str) -> TokenData | None:
     except JWTError:
         return None
 
-async def get_current_user(token: str = Depends(oauth2_scheme), db: AsyncSession = Depends(get_db)) -> User:
+
+async def get_current_user(
+    token: str = Depends(oauth2_scheme), db: AsyncSession = Depends(get_db)
+) -> User:
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Invalid credentials",
-        headers={"WWW-Authenticate": "Bearer"}
+        headers={"WWW-Authenticate": "Bearer"},
     )
     token_data = decode_access_token(token)
     if token_data is None:
         raise credentials_exception
     user_repo = UserRepository(db)
-    user = await user_repo.get_user_by_username(token_data.username)
+    user = await user_repo.get_user_by_email(token_data.username)
     if user is None:
         raise credentials_exception
     return user

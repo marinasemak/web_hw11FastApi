@@ -1,4 +1,4 @@
-from sqlalchemy import and_, extract, or_, select
+from sqlalchemy import select
 
 from src.auth.models import User
 from src.auth.pass_utils import get_password_hash
@@ -14,7 +14,7 @@ class UserRepository:
         new_user = User(
             username=user_create.username,
             email=user_create.email,
-            password_hashed=password_hashed
+            password_hashed=password_hashed,
         )
         self.session.add(new_user)
         await self.session.commit()
@@ -23,10 +23,5 @@ class UserRepository:
 
     async def get_user_by_email(self, email):
         query = select(User).where(User.email == email)
-        result = await self.session.execute(query)
-        return result.scalar_one_or_none()
-
-    async def get_user_by_username(self, username):
-        query = select(User).where(User.username == username)
         result = await self.session.execute(query)
         return result.scalar_one_or_none()
