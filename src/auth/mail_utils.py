@@ -10,7 +10,7 @@ mail_conf = ConnectionConfig(
     MAIL_SERVER=settings.mail_server,
     MAIL_STARTTLS=False,
     MAIL_SSL_TLS=False,
-    MAIL_CREDENTIALS=True
+    USE_CREDENTIALS=True
 
 )
 
