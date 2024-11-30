@@ -9,8 +9,10 @@ from src.auth.utils import create_verification_token
 
 env = Environment(loader=FileSystemLoader("src/templates"))
 
+
 class EmailSchema(BaseModel):
     email: EmailStr
+
 
 mail_conf = ConnectionConfig(
     MAIL_USERNAME=settings.mail_username,
@@ -20,8 +22,7 @@ mail_conf = ConnectionConfig(
     MAIL_SERVER=settings.mail_server,
     MAIL_STARTTLS=False,
     MAIL_SSL_TLS=False,
-    USE_CREDENTIALS=True
-
+    USE_CREDENTIALS=True,
 )
 
 

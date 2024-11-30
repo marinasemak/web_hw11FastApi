@@ -11,6 +11,7 @@ class UserCreate(UserBase):
 
 
 class UserResponse(UserBase):
+    avatar: str
     id: int
 
     class Config:

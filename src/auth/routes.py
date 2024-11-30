@@ -7,8 +7,13 @@ from config.db import get_db
 from src.auth.pass_utils import verify_password
 from src.auth.repos import UserRepository
 from src.auth.schema import Token, UserCreate, UserResponse
-from src.auth.utils import (create_access_token, create_refresh_token,
-                            decode_access_token, create_verification_token, decode_verification_token)
+from src.auth.utils import (
+    create_access_token,
+    create_refresh_token,
+    decode_access_token,
+    create_verification_token,
+    decode_verification_token,
+)
 from src.auth.mail_utils import send_verification_email
 
 router = APIRouter()
@@ -18,7 +23,12 @@ env = Environment(loader=FileSystemLoader("src/templates"))
 @router.post(
     "/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED
 )
-async def register(user_create: UserCreate, background_tasks: BackgroundTasks, request: Request, db: AsyncSession = Depends(get_db)):
+async def register(
+    user_create: UserCreate,
+    background_tasks: BackgroundTasks,
+    request: Request,
+    db: AsyncSession = Depends(get_db),
+):
     user_repo = UserRepository(db)
     user = await user_repo.get_user_by_email(user_create.email)
     if user:
@@ -47,8 +57,6 @@ async def verify_email(token: str, db: AsyncSession = Depends(get_db)):
     return {"msg": "Email verified successfully"}
 
 
-
-
 @router.post("/login", response_model=Token)
 async def login_for_access_token(
     form_data: OAuth2PasswordRequestForm = Depends(), db: AsyncSession = Depends(get_db)
@@ -62,7 +70,9 @@ async def login_for_access_token(
             headers={"WWW-Authenticate": "Bearer"},
         )
     if not user.is_active:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Email not confirmed")
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Email not confirmed"
+        )
     access_token = create_access_token(data={"sub": user.email})
     refresh_token = create_refresh_token(data={"sub": user.email})
     return Token(
