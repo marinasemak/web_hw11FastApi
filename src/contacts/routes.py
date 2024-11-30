@@ -2,6 +2,7 @@ from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
 from fastapi.responses import JSONResponse
+from fastapi_limiter.depends import RateLimiter
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from config.db import get_db
@@ -20,7 +21,11 @@ async def unexpected_exception_handler(request: Request, exc: Exception):
     )
 
 
-@router.post("/", response_model=ContactResponse, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=ContactResponse,
+             status_code=status.HTTP_201_CREATED,
+             description='No more than 5 requests per minute',
+             dependencies=[Depends(RateLimiter(times=5, seconds=60))]
+             )
 async def create_contact(
     contact: ContactCreate,
     user: User = Depends(get_current_user),
@@ -33,7 +38,9 @@ async def create_contact(
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(e))
 
 
-@router.get("/", response_model=List[ContactResponse])
+@router.get("/", response_model=List[ContactResponse],
+            description='No more than 10 requests per minute',
+            dependencies=[Depends(RateLimiter(times=10, seconds=60))])
 async def get_contacts(
     offset: int = 0,
     limit: int = Query(default=10, le=100, ge=10),
@@ -49,7 +56,10 @@ async def get_contacts(
     return contacts
 
 
-@router.get("/search", response_model=ContactResponse)
+@router.get("/search", response_model=ContactResponse,
+            description='No more than 10 requests per minute',
+            dependencies=[Depends(RateLimiter(times=10, seconds=60))]
+            )
 async def search_contact(
     param: str = Query(description="Search by first name or last name or email"),
     user: User = Depends(get_current_user),
@@ -64,7 +74,10 @@ async def search_contact(
     return contact
 
 
-@router.get("/upcomingBirthdays", response_model=List[ContactResponse])
+@router.get("/upcomingBirthdays", response_model=List[ContactResponse],
+            description='No more than 10 requests per minute',
+            dependencies=[Depends(RateLimiter(times=10, seconds=60))]
+            )
 async def get_upcoming_birthdays(
     user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)
 ):
@@ -80,7 +93,10 @@ async def get_upcoming_birthdays(
     return contact
 
 
-@router.get("/{contact_id}", response_model=ContactResponse)
+@router.get("/{contact_id}", response_model=ContactResponse,
+            description='No more than 10 requests per minute',
+            dependencies=[Depends(RateLimiter(times=10, seconds=60))]
+            )
 async def get_contact(
     contact_id: int,
     user: User = Depends(get_current_user),
@@ -95,7 +111,10 @@ async def get_contact(
     return contact
 
 
-@router.put("/{contact_id}", response_model=ContactResponse)
+@router.put("/{contact_id}", response_model=ContactResponse,
+            description='No more than 5 requests per minute',
+            dependencies=[Depends(RateLimiter(times=5, seconds=60))]
+            )
 async def update_contact(
     contact_id: int,
     contact: ContactUpdate,
@@ -114,7 +133,10 @@ async def update_contact(
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(e))
 
 
-@router.delete("/{contact_id}", response_model=ContactResponse)
+@router.delete("/{contact_id}", response_model=ContactResponse,
+               description='No more than 10 requests per minute',
+               dependencies=[Depends(RateLimiter(times=10, seconds=60))]
+               )
 async def delete_contact(
     contact_id: int,
     user: User = Depends(get_current_user),
