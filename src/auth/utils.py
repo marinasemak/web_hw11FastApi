@@ -21,7 +21,9 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
 
 
 def create_verification_token(email: str) -> str:
-    expire = datetime.now(timezone.utc) + timedelta(hours=VERIFICATION_TOKEN_EXPIRE_HOURS)
+    expire = datetime.now(timezone.utc) + timedelta(
+        hours=VERIFICATION_TOKEN_EXPIRE_HOURS
+    )
     to_encode = {"exp": expire, "sub": email}
     encoded_jwt = jwt.encode(to_encode, settings.secret_key, algorithm=ALGORITHM)
     return encoded_jwt
