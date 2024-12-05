@@ -27,6 +27,13 @@ mail_conf = ConnectionConfig(
 
 
 async def send_verification_email(email: EmailStr, host: URL):
+    """
+        Send email to created user with verification token
+        :param email: User email.
+        :type email: EmailStr
+        :param host: Host for validation link
+        :type host: URL
+    """
     try:
         verification_token = create_verification_token(email)
         template = env.get_template("verification_email.html")

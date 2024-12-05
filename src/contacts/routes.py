@@ -31,6 +31,17 @@ async def create_contact(
     user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ) -> Contact:
+    """
+        Request to create new contact
+        :param contact: Contact to create
+        :type contact: ContactCreate
+        :param user: The user to create contacts for
+        :type user: User
+        :param db: The database session
+        :type db: Session
+        :return: Created contact
+        :rtype: ContactResponse
+    """
     contact_repo = ContactRepository(db)
     try:
         return await contact_repo.create_contact(contact, user.id)
@@ -47,6 +58,19 @@ async def get_contacts(
     user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
+    """
+        Request to get list of contacts with specified offset and limit
+        :param offset: The number of contacts to skip
+        :type offset: int
+        :param limit: The max number of contacts to return
+        :type limit: int
+        :param user: The user to get contacts for
+        :type user: User
+        :param db: The database session
+        :type db: Session
+        :return: List of contacts
+        :rtype: List[ContactResponse]
+    """
     contact_repo = ContactRepository(db)
     contacts = await contact_repo.get_contacts(user.id, offset, limit)
     if not contacts:

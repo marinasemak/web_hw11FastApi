@@ -24,14 +24,57 @@ REST API main
 
 REST API repository Contacts
 =========================
-.. automodule:: src.contacts.models
+.. automodule:: src.contacts.repos
   :members:
   :undoc-members:
   :show-inheritance:
 
-REST API repository Users
+REST API repository Auth
 =========================
-.. automodule:: src.auth.models
+.. automodule:: src.auth.repos
   :members:
   :undoc-members:
   :show-inheritance:
+
+REST API routes Contacts
+=========================
+.. automodule:: src.contacts.routes
+  :members:
+  :undoc-members:
+  :show-inheritance:
+
+REST API routes Users
+=========================
+.. automodule:: src.users.routes
+  :members:
+  :undoc-members:
+  :show-inheritance:
+
+REST API routes Auth
+=========================
+.. automodule:: src.auth.routes
+  :members:
+  :undoc-members:
+  :show-inheritance:
+
+REST API routes Auth
+=========================
+.. automodule:: src.auth.utils
+  :members:
+  :undoc-members:
+  :show-inheritance:
+
+REST API routes Passwords
+=========================
+.. automodule:: src.auth.pass_utils
+  :members:
+  :undoc-members:
+  :show-inheritance:
+
+REST API routes Emails
+=========================
+.. automodule:: src.auth.mail_utils
+  :members:
+  :undoc-members:
+  :show-inheritance:
+

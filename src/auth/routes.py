@@ -29,6 +29,19 @@ async def register(
     request: Request,
     db: AsyncSession = Depends(get_db),
 ):
+    """
+        Register new user
+        :param user_create: New user to register
+        :type user_create: UserCreate
+        :param background_tasks: Send verification email
+        :type background_tasks: BackgroundTasks
+        :param request: Gets base url to create verification link
+        :type request: Request
+        :param db: The database session
+        :type db: Session
+        :return: Registered user
+        :rtype: UserResponse
+    """
     user_repo = UserRepository(db)
     user = await user_repo.get_user_by_email(user_create.email)
     if user:
@@ -43,6 +56,15 @@ async def register(
 
 @router.get("/verify-email")
 async def verify_email(token: str, db: AsyncSession = Depends(get_db)):
+    """
+        Verify user email
+        :param token: token wich verified user email and set it as active
+        :type token: str
+        :param db: The database session
+        :type db: Session
+        :return: Success message
+        :rtype: str
+    """
     email: str = decode_verification_token(token)
     user_repo = UserRepository(db)
     user = await user_repo.get_user_by_email(email)
@@ -60,7 +82,16 @@ async def verify_email(token: str, db: AsyncSession = Depends(get_db)):
 @router.post("/login", response_model=Token)
 async def login_for_access_token(
     form_data: OAuth2PasswordRequestForm = Depends(), db: AsyncSession = Depends(get_db)
-):
+) -> Token:
+    """
+        User authentication
+        :param form_data: User credentials
+        :type form_data: OAuth2PasswordRequestForm
+        :param db: The database session
+        :type db: Session
+        :return: Token: authentication (login) token, refresh token
+        :rtype: str
+    """
     user_repo = UserRepository(db)
     user = await user_repo.get_user_by_email(form_data.username)
     if not user or not verify_password(form_data.password, user.password_hashed):
@@ -81,7 +112,16 @@ async def login_for_access_token(
 
 
 @router.post("/refresh", response_model=Token)
-async def refresh_tokens(refresh_token: str, db: AsyncSession = Depends(get_db)):
+async def refresh_tokens(refresh_token: str, db: AsyncSession = Depends(get_db)) -> Token:
+    """
+        Refresh login token
+        :param refresh_token: Token form login request to refresh login token
+        :type refresh_token: str
+        :param db: The database session
+        :type db: Session
+        :return: Token: New authentication (login) token, new refresh token
+        :rtype: str
+    """
     token_data = decode_access_token(refresh_token)
     user_repo = UserRepository(db)
     user = await user_repo.get_user_by_email(token_data.username)
