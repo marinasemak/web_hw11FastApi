@@ -23,11 +23,11 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
 
 def create_verification_token(email: EmailStr) -> str:
     """
-        Create encoded token for user verification from user email and secret key
-        :param email: User email
-        :type email: EmailStr
-        :return: Encoded jwt token
-        :rtype: str
+    Create encoded token for user verification from user email and secret key
+    :param email: User email
+    :type email: EmailStr
+    :return: Encoded jwt token
+    :rtype: str
     """
     expire = datetime.now(timezone.utc) + timedelta(
         hours=VERIFICATION_TOKEN_EXPIRE_HOURS
@@ -39,11 +39,11 @@ def create_verification_token(email: EmailStr) -> str:
 
 def decode_verification_token(token: str) -> str | None:
     """
-        Decode verification token
-        :param token: Token to verify
-        :type token: str
-        :return: User email or None
-        :rtype: str | None
+    Decode verification token
+    :param token: Token to verify
+    :type token: str
+    :return: User email or None
+    :rtype: str | None
     """
     try:
         payload = jwt.decode(token, settings.secret_key, algorithms=ALGORITHM)
@@ -57,11 +57,11 @@ def decode_verification_token(token: str) -> str | None:
 
 def create_access_token(data: dict) -> str:
     """
-        Create token to get access
-        :param data: Username (email)
-        :type data: dict
-        :return: Encoded jwt token
-        :rtype: str
+    Create token to get access
+    :param data: Username (email)
+    :type data: dict
+    :return: Encoded jwt token
+    :rtype: str
     """
     to_encode = data.copy()
     expire = datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
@@ -72,11 +72,11 @@ def create_access_token(data: dict) -> str:
 
 def create_refresh_token(data: dict):
     """
-        Create refresh token
-        :param data: Username (email)
-        :type data: dict
-        :return: Encoded jwt token
-        :rtype: str
+    Create refresh token
+    :param data: Username (email)
+    :type data: dict
+    :return: Encoded jwt token
+    :rtype: str
     """
     to_encode = data.copy()
     expire = datetime.now(timezone.utc) + timedelta(days=REFRESH_TOKEN_EXPIRE_DAYS)
@@ -87,11 +87,11 @@ def create_refresh_token(data: dict):
 
 def decode_access_token(token: str) -> TokenData | None:
     """
-        Decode access token
-        :param token: Token to decode
-        :type token: str
-        :return: User email from token if exists
-        :rtype: TokenData | None
+    Decode access token
+    :param token: Token to decode
+    :type token: str
+    :return: User email from token if exists
+    :rtype: TokenData | None
     """
     try:
         payload = jwt.decode(token, settings.secret_key, algorithms=ALGORITHM)
@@ -107,13 +107,13 @@ async def get_current_user(
     token: str = Depends(oauth2_scheme), db: AsyncSession = Depends(get_db)
 ) -> User:
     """
-        Find user with token in db
-        :param token: User token
-        :type token: str
-        :param db: The database session
-        :type db: Session
-        :return: User from db
-        :rtype: User
+    Find user with token in db
+    :param token: User token
+    :type token: str
+    :param db: The database session
+    :type db: Session
+    :return: User from db
+    :rtype: User
     """
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,

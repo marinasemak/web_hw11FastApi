@@ -13,13 +13,13 @@ class ContactRepository:
 
     async def create_contact(self, contact: ContactCreate, owner_id: int) -> Contact:
         """
-            Create new contact
-            :param contact: Contact to create
-            :type contact: ContactCreate
-            :param owner_id: User who creates contact
-            :type owner_id: int
-            :return: Created contact
-            :rtype: Contact
+        Create new contact
+        :param contact: Contact to create
+        :type contact: ContactCreate
+        :param owner_id: User who creates contact
+        :type owner_id: int
+        :return: Created contact
+        :rtype: Contact
         """
         new_contact = Contact(**contact.model_dump(), owner_id=owner_id)
         try:
@@ -32,13 +32,13 @@ class ContactRepository:
 
     async def get_contact(self, owner_id: int, contact_id: int) -> Contact | None:
         """
-            Get contact by id
-            :param owner_id: User who created contact
-            :type owner_id: int
-            :param contact_id: Contact id
-            :type contact_id: int
-            :return: Contact from query
-            :rtype: Contact | None
+        Get contact by id
+        :param owner_id: User who created contact
+        :type owner_id: int
+        :param contact_id: Contact id
+        :type contact_id: int
+        :return: Contact from query
+        :rtype: Contact | None
         """
         query = select(Contact).where(
             and_(Contact.owner_id == owner_id), (Contact.id == contact_id)
@@ -50,15 +50,15 @@ class ContactRepository:
         self, owner_id: int, offset: int, limit: int
     ) -> List[Contact]:
         """
-            Get list of contacts
-            :param owner_id: User who created contacts
-            :type owner_id: int
-            :param offset: The number of contacts to skip
-            :type offset: int
-            :param limit: The max number of contacts to return
-            :type limit: int
-            :return: Contacts from query
-            :rtype: List[Contact]
+        Get list of contacts
+        :param owner_id: User who created contacts
+        :type owner_id: int
+        :param offset: The number of contacts to skip
+        :type offset: int
+        :param limit: The max number of contacts to return
+        :type limit: int
+        :return: Contacts from query
+        :rtype: List[Contact]
         """
         query = (
             select(Contact)
@@ -71,13 +71,13 @@ class ContactRepository:
 
     async def search_contacts(self, owner_id, param: str) -> List[Contact]:
         """
-            Search contacts by first name or last name or email
-            :param owner_id: User who created contacts
-            :type owner_id: int
-            :param param: First name or last name or email to search by
-            :type param: str
-            :return: Contacts from query
-            :rtype: List[Contact]
+        Search contacts by first name or last name or email
+        :param owner_id: User who created contacts
+        :type owner_id: int
+        :param param: First name or last name or email to search by
+        :type param: str
+        :return: Contacts from query
+        :rtype: List[Contact]
         """
         query = (
             select(Contact)
@@ -97,15 +97,15 @@ class ContactRepository:
         self, owner_id, contact_id: int, new_contact: ContactUpdate
     ) -> Contact | None:
         """
-            Update contact
-            :param owner_id: User who created contact
-            :type owner_id: int
-            :param contact_id: Id of contact to update
-            :type contact_id: str
-            :param new_contact: Contact data to update
-            :type contact_id: ContactUpdate
-            :return: Updated contact
-            :rtype: Contact | None
+        Update contact
+        :param owner_id: User who created contact
+        :type owner_id: int
+        :param contact_id: Id of contact to update
+        :type contact_id: str
+        :param new_contact: Contact data to update
+        :type contact_id: ContactUpdate
+        :return: Updated contact
+        :rtype: Contact | None
         """
         query = select(Contact).where(
             and_(Contact.owner_id == owner_id), (Contact.id == contact_id)
@@ -125,13 +125,13 @@ class ContactRepository:
 
     async def remove_contact(self, owner_id, contact_id: int) -> Contact | None:
         """
-            Remove contact
-            :param owner_id: User who created contact
-            :type owner_id: int
-            :param contact_id: Id of contact to remove
-            :type contact_id: str
-            :return: Removed contact
-            :rtype: Contact | None
+        Remove contact
+        :param owner_id: User who created contact
+        :type owner_id: int
+        :param contact_id: Id of contact to remove
+        :type contact_id: str
+        :return: Removed contact
+        :rtype: Contact | None
         """
         query = select(Contact).where(
             and_(Contact.owner_id == owner_id), (Contact.id == contact_id)
@@ -145,11 +145,11 @@ class ContactRepository:
 
     async def get_upcoming_birthdays(self, owner_id) -> List[Contact]:
         """
-            Selects list of contacts who's upcoming birthdays within 7 days
-            :param owner_id: User who created contacts
-            :type owner_id: int
-            :return: List of contacts
-            :rtype: List[Contact]
+        Selects list of contacts who's upcoming birthdays within 7 days
+        :param owner_id: User who created contacts
+        :type owner_id: int
+        :return: List of contacts
+        :rtype: List[Contact]
         """
         query = (
             select(Contact)

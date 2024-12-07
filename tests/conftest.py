@@ -14,7 +14,10 @@ from config.general import settings
 
 TEST_DB_URL = settings.database_test_url
 engine = create_async_engine(TEST_DB_URL, echo=True)
-AsyncSessionLocal = sessionmaker(autocommit=False, autoflash=False, bind=engine, class_=AsyncSession)
+AsyncSessionLocal = sessionmaker(
+    autocommit=False, autoflash=False, bind=engine, class_=AsyncSession
+)
+
 
 @pytest_asyncio.fixture(scope="function")
 async def setup_db():

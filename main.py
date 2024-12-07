@@ -16,8 +16,13 @@ from src.contacts.routes import unexpected_exception_handler
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    redis_connection = await redis.Redis(host=settings.redis_host, port=settings.redis_port, db=0,
-                                         encoding="utf-8", decode_responses=True)
+    redis_connection = await redis.Redis(
+        host=settings.redis_host,
+        port=settings.redis_port,
+        db=0,
+        encoding="utf-8",
+        decode_responses=True,
+    )
     await FastAPILimiter.init(redis_connection)
     try:
         yield
@@ -27,9 +32,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 logging.basicConfig(level=logging.INFO)
-origins = [
-    "http://localhost:3000"
-    ]
+origins = ["http://localhost:3000"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -38,6 +41,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 @app.middleware("http")
 async def log_requests(request: Request, call_next):

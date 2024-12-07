@@ -21,26 +21,28 @@ async def unexpected_exception_handler(request: Request, exc: Exception):
     )
 
 
-@router.post("/", response_model=ContactResponse,
-             status_code=status.HTTP_201_CREATED,
-             description='No more than 5 requests per minute',
-             dependencies=[Depends(RateLimiter(times=5, seconds=60))]
-             )
+@router.post(
+    "/",
+    response_model=ContactResponse,
+    status_code=status.HTTP_201_CREATED,
+    description="No more than 5 requests per minute",
+    dependencies=[Depends(RateLimiter(times=5, seconds=60))],
+)
 async def create_contact(
     contact: ContactCreate,
     user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ) -> Contact:
     """
-        Request to create new contact
-        :param contact: Contact to create
-        :type contact: ContactCreate
-        :param user: The user to create contacts for
-        :type user: User
-        :param db: The database session
-        :type db: Session
-        :return: Created contact
-        :rtype: ContactResponse
+    Request to create new contact
+    :param contact: Contact to create
+    :type contact: ContactCreate
+    :param user: The user to create contacts for
+    :type user: User
+    :param db: The database session
+    :type db: Session
+    :return: Created contact
+    :rtype: ContactResponse
     """
     contact_repo = ContactRepository(db)
     try:
@@ -49,9 +51,12 @@ async def create_contact(
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(e))
 
 
-@router.get("/", response_model=List[ContactResponse],
-            description='No more than 10 requests per minute',
-            dependencies=[Depends(RateLimiter(times=10, seconds=60))])
+@router.get(
+    "/",
+    response_model=List[ContactResponse],
+    description="No more than 10 requests per minute",
+    dependencies=[Depends(RateLimiter(times=10, seconds=60))],
+)
 async def get_contacts(
     offset: int = 0,
     limit: int = Query(default=10, le=100, ge=10),
@@ -59,17 +64,17 @@ async def get_contacts(
     db: AsyncSession = Depends(get_db),
 ):
     """
-        Request to get list of contacts with specified offset and limit
-        :param offset: The number of contacts to skip
-        :type offset: int
-        :param limit: The max number of contacts to return
-        :type limit: int
-        :param user: The user to get contacts for
-        :type user: User
-        :param db: The database session
-        :type db: Session
-        :return: List of contacts
-        :rtype: List[ContactResponse]
+    Request to get list of contacts with specified offset and limit
+    :param offset: The number of contacts to skip
+    :type offset: int
+    :param limit: The max number of contacts to return
+    :type limit: int
+    :param user: The user to get contacts for
+    :type user: User
+    :param db: The database session
+    :type db: Session
+    :return: List of contacts
+    :rtype: List[ContactResponse]
     """
     contact_repo = ContactRepository(db)
     contacts = await contact_repo.get_contacts(user.id, offset, limit)
@@ -80,10 +85,12 @@ async def get_contacts(
     return contacts
 
 
-@router.get("/search", response_model=ContactResponse,
-            description='No more than 10 requests per minute',
-            dependencies=[Depends(RateLimiter(times=10, seconds=60))]
-            )
+@router.get(
+    "/search",
+    response_model=ContactResponse,
+    description="No more than 10 requests per minute",
+    dependencies=[Depends(RateLimiter(times=10, seconds=60))],
+)
 async def search_contact(
     param: str = Query(description="Search by first name or last name or email"),
     user: User = Depends(get_current_user),
@@ -98,10 +105,12 @@ async def search_contact(
     return contact
 
 
-@router.get("/upcomingBirthdays", response_model=List[ContactResponse],
-            description='No more than 10 requests per minute',
-            dependencies=[Depends(RateLimiter(times=10, seconds=60))]
-            )
+@router.get(
+    "/upcomingBirthdays",
+    response_model=List[ContactResponse],
+    description="No more than 10 requests per minute",
+    dependencies=[Depends(RateLimiter(times=10, seconds=60))],
+)
 async def get_upcoming_birthdays(
     user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)
 ):
@@ -117,10 +126,12 @@ async def get_upcoming_birthdays(
     return contact
 
 
-@router.get("/{contact_id}", response_model=ContactResponse,
-            description='No more than 10 requests per minute',
-            dependencies=[Depends(RateLimiter(times=10, seconds=60))]
-            )
+@router.get(
+    "/{contact_id}",
+    response_model=ContactResponse,
+    description="No more than 10 requests per minute",
+    dependencies=[Depends(RateLimiter(times=10, seconds=60))],
+)
 async def get_contact(
     contact_id: int,
     user: User = Depends(get_current_user),
@@ -135,10 +146,12 @@ async def get_contact(
     return contact
 
 
-@router.put("/{contact_id}", response_model=ContactResponse,
-            description='No more than 5 requests per minute',
-            dependencies=[Depends(RateLimiter(times=5, seconds=60))]
-            )
+@router.put(
+    "/{contact_id}",
+    response_model=ContactResponse,
+    description="No more than 5 requests per minute",
+    dependencies=[Depends(RateLimiter(times=5, seconds=60))],
+)
 async def update_contact(
     contact_id: int,
     contact: ContactUpdate,
@@ -157,10 +170,12 @@ async def update_contact(
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(e))
 
 
-@router.delete("/{contact_id}", response_model=ContactResponse,
-               description='No more than 10 requests per minute',
-               dependencies=[Depends(RateLimiter(times=10, seconds=60))]
-               )
+@router.delete(
+    "/{contact_id}",
+    response_model=ContactResponse,
+    description="No more than 10 requests per minute",
+    dependencies=[Depends(RateLimiter(times=10, seconds=60))],
+)
 async def delete_contact(
     contact_id: int,
     user: User = Depends(get_current_user),
