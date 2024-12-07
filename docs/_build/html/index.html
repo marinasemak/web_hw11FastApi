@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Rest Api documentation &#8212; Rest Api  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css?v=279e0f84" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Rest Api  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Rest Api documentation</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="rest-api-documentation">
+<h1>Rest Api documentation<a class="headerlink" href="#rest-api-documentation" title="Link to this heading">¶</a></h1>
+<p>Add your content using <code class="docutils literal notranslate"><span class="pre">reStructuredText</span></code> syntax. See the
+<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">reStructuredText</a>
+documentation for details.</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="rest-api-main">
+<h1>REST API main<a class="headerlink" href="#rest-api-main" title="Link to this heading">¶</a></h1>
+</section>
+<section id="rest-api-repository-contacts">
+<h1>REST API repository Contacts<a class="headerlink" href="#rest-api-repository-contacts" title="Link to this heading">¶</a></h1>
+</section>
+<section id="rest-api-repository-auth">
+<h1>REST API repository Auth<a class="headerlink" href="#rest-api-repository-auth" title="Link to this heading">¶</a></h1>
+</section>
+<section id="rest-api-routes-contacts">
+<h1>REST API routes Contacts<a class="headerlink" href="#rest-api-routes-contacts" title="Link to this heading">¶</a></h1>
+</section>
+<section id="rest-api-routes-users">
+<h1>REST API routes Users<a class="headerlink" href="#rest-api-routes-users" title="Link to this heading">¶</a></h1>
+</section>
+<section id="rest-api-routes-auth">
+<h1>REST API routes Auth<a class="headerlink" href="#rest-api-routes-auth" title="Link to this heading">¶</a></h1>
+</section>
+<section id="id1">
+<h1>REST API routes Auth<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+</section>
+<section id="module-src.auth.pass_utils">
+<span id="rest-api-routes-passwords"></span><h1>REST API routes Passwords<a class="headerlink" href="#module-src.auth.pass_utils" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.auth.pass_utils.get_password_hash">
+<span class="sig-prename descclassname"><span class="pre">src.auth.pass_utils.</span></span><span class="sig-name descname"><span class="pre">get_password_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/auth/pass_utils.html#get_password_hash"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.auth.pass_utils.get_password_hash" title="Link to this definition">¶</a></dt>
+<dd><p>Hash user password
+:type password: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>
+:param password: User password in hashed view.
+:type password: str
+:return: Hashed password
+:rtype: str</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.auth.pass_utils.verify_password">
+<span class="sig-prename descclassname"><span class="pre">src.auth.pass_utils.</span></span><span class="sig-name descname"><span class="pre">verify_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plain_password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password_hashed</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/auth/pass_utils.html#verify_password"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.auth.pass_utils.verify_password" title="Link to this definition">¶</a></dt>
+<dd><p>Verify if user enters password the same as its hashed version in db
+:type plain_password: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>
+:param plain_password: User password.
+:type plain_password: str
+:type password_hashed: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>
+:param password_hashed: Hashed user password
+:type password_hashed: str
+:return: If password is valid
+:rtype: bool</p>
+</dd></dl>
+
+</section>
+<section id="rest-api-routes-emails">
+<h1>REST API routes Emails<a class="headerlink" href="#rest-api-routes-emails" title="Link to this heading">¶</a></h1>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="#">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Rest Api documentation</a></li>
+<li><a class="reference internal" href="#rest-api-main">REST API main</a></li>
+<li><a class="reference internal" href="#rest-api-repository-contacts">REST API repository Contacts</a></li>
+<li><a class="reference internal" href="#rest-api-repository-auth">REST API repository Auth</a></li>
+<li><a class="reference internal" href="#rest-api-routes-contacts">REST API routes Contacts</a></li>
+<li><a class="reference internal" href="#rest-api-routes-users">REST API routes Users</a></li>
+<li><a class="reference internal" href="#rest-api-routes-auth">REST API routes Auth</a></li>
+<li><a class="reference internal" href="#id1">REST API routes Auth</a></li>
+<li><a class="reference internal" href="#module-src.auth.pass_utils">REST API routes Passwords</a><ul>
+<li><a class="reference internal" href="#src.auth.pass_utils.get_password_hash"><code class="docutils literal notranslate"><span class="pre">get_password_hash()</span></code></a></li>
+<li><a class="reference internal" href="#src.auth.pass_utils.verify_password"><code class="docutils literal notranslate"><span class="pre">verify_password()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rest-api-routes-emails">REST API routes Emails</a></li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Rest Api  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Rest Api documentation</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, marine.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>
