@@ -101,7 +101,7 @@ class ContactRepository:
         :param owner_id: User who created contact
         :type owner_id: int
         :param contact_id: Id of contact to update
-        :type contact_id: str
+        :type contact_id: int
         :param new_contact: Contact data to update
         :type contact_id: ContactUpdate
         :return: Updated contact
@@ -129,7 +129,7 @@ class ContactRepository:
         :param owner_id: User who created contact
         :type owner_id: int
         :param contact_id: Id of contact to remove
-        :type contact_id: str
+        :type contact_id: int
         :return: Removed contact
         :rtype: Contact | None
         """

@@ -96,6 +96,17 @@ async def search_contact(
     user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
+    """
+    Search contacts by first name or last name or email
+    :param param: First name or last name or email to search by
+    :type param: str
+    :param user: User who created contacts
+    :type user: User
+    :param db: The database session
+    :type db: Session
+    :return: Searched contact
+    :rtype: ContactResponse
+    """
     contact_repo = ContactRepository(db)
     contact = await contact_repo.search_contacts(user.id, param)
     if not contact:
@@ -116,6 +127,12 @@ async def get_upcoming_birthdays(
 ):
     """
     Gives the list of contacts with upcoming birthdays within the next 7 days
+    :param user: User who created contacts
+    :type user: User
+    :param db: The database session
+    :type db: Session
+    :return: List of contacts
+    :rtype: List[ContactResponse]
     """
     contact_repo = ContactRepository(db)
     contact = await contact_repo.get_upcoming_birthdays(user.id)
@@ -137,6 +154,17 @@ async def get_contact(
     user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ) -> Contact:
+    """
+    Get contact by id
+    :param contact_id: Contact id
+    :type contact_id: int
+    :param user: User who created contact
+    :type user: User
+    :param db: The database session
+    :type db: Session
+    :return: Contact from query
+    :rtype: Contact | None
+    """
     contact_repo = ContactRepository(db)
     contact = await contact_repo.get_contact(user.id, contact_id)
     if not contact:
@@ -158,6 +186,19 @@ async def update_contact(
     user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ) -> Contact:
+    """
+    Update contact
+    :param contact_id: Id of contact to update
+    :type contact_id: int
+    :param contact: Contact data to update
+    :type contact: ContactUpdate
+    :param user: User who created contact
+    :type user: int
+    :param db: The database session
+    :type db: Session
+    :return: Updated contact
+    :rtype: ContactResponse | None
+    """
     contact_repo = ContactRepository(db)
     try:
         contact = await contact_repo.update_contact(user.id, contact_id, contact)
@@ -181,6 +222,17 @@ async def delete_contact(
     user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
+    """
+    Remove contact
+    :param contact_id: Id of contact to remove
+    :type contact_id: int
+    :param user: User who created contact
+    :type user: int
+    :param db: The database session
+    :type db: Session
+    :return: Removed contact
+    :rtype: ContactResponse | None
+    """
     contact_repo = ContactRepository(db)
     contact = await contact_repo.remove_contact(user.id, contact_id)
     if not contact:

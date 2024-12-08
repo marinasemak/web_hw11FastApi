@@ -16,6 +16,14 @@ from src.contacts.routes import unexpected_exception_handler
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    # Hide description from Swagger
+    openapi_schema = app.openapi()
+    for path in openapi_schema["paths"].values():
+        for method in path.values():
+            method["description"] = None  # Видаляємо опис
+    app.openapi_schema = openapi_schema
+
+    # Connect to Redis
     redis_connection = await redis.Redis(
         host=settings.redis_host,
         port=settings.redis_port,
@@ -33,6 +41,16 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 logging.basicConfig(level=logging.INFO)
 origins = ["http://localhost:3000"]
+
+
+@app.on_event("startup")
+def customize_openapi():
+    openapi_schema = app.openapi()
+    for path in openapi_schema["paths"].values():
+        for method in path.values():
+            method.pop("description", None)  # Прибираємо опис
+    app.openapi_schema = openapi_schema
+
 
 app.add_middleware(
     CORSMiddleware,

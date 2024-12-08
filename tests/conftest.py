@@ -2,21 +2,32 @@ import asyncio
 
 import pytest
 import pytest_asyncio
-from sqlalchemy.ext.asyncio import create_async_engine
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
 
 from main import app
 from src.auth.models import User
 from src.auth.pass_utils import get_password_hash
-from config.db import engine, Base, get_db
+from config.db import Base, get_db
 from config.general import settings
+
 
 TEST_DB_URL = settings.database_test_url
 engine = create_async_engine(TEST_DB_URL, echo=True)
-AsyncSessionLocal = sessionmaker(
-    autocommit=False, autoflash=False, bind=engine, class_=AsyncSession
+AsyncSessionLocal = async_sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    expire_on_commit=False,
+    bind=engine,
+    class_=AsyncSession,
 )
+
+
+@pytest.fixture(scope="session")
+def event_loop():
+    """Create an instance of the event loop to be used in tests."""
+    loop = asyncio.get_event_loop_policy().new_event_loop()
+    yield loop
+    loop.close()
 
 
 @pytest_asyncio.fixture(scope="function")
@@ -28,7 +39,7 @@ async def setup_db():
         await conn.run_sync(Base.metadata.create_all)
 
     yield
-    # Drop all tables after test
+    # # Drop all tables after test
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
 
@@ -45,9 +56,9 @@ def override_get_db(db_session):
         async with db_session as session:
             yield session
 
-        app.dependency_overrides[get_db] = _get_db()
-        yield
-        app.dependency_overrides.clear()
+    app.dependency_overrides[get_db] = _get_db
+    yield
+    app.dependency_overrides.clear()
 
 
 @pytest_asyncio.fixture(scope="function")
@@ -59,12 +70,12 @@ async def user_password(faker):
 async def test_user(db_session, faker, user_password):
     hashed_password = get_password_hash(user_password)
     user = User(
-        username=faker.username(),
+        username=faker.user_name(),
         email=faker.email(),
         password_hashed=hashed_password,
         is_active=True,
     )
     db_session.add(user)
     await db_session.commit()
-    await db_session.refresh(user)  # To get the ID from the db
+    await db_session.refresh(user)
     return user

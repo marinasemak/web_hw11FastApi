@@ -24,6 +24,15 @@ async def get_current_user_info(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
+    """
+    Request to show account of current user
+    :param current_user: The user who makes request
+    :type current_user: User
+    :param db: The database session
+    :type db: Session
+    :return: Current user info
+    :rtype: UserResponse
+    """
     return current_user
 
 
@@ -33,6 +42,17 @@ async def update_avatar(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
+    """
+    Request to update avatar of current user
+    :param file: Image file to upload
+    :type file: UploadFile
+    :param current_user: Current user to update avatar for
+    :type current_user: User
+    :param db: The database session
+    :type db: Session
+    :return: User info with updated avatar link from db
+    :rtype: UserResponse
+    """
     cloudinary.config(
         cloud_name=settings.cloudinary_name,
         api_key=settings.cloudinary_api_key,

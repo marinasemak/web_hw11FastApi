@@ -75,23 +75,26 @@ class TestContacts(unittest.IsolatedAsyncioTestCase):
     async def test_get_contacts(self):
         offset = 0
         limit = 10
-        contacts = [Contact(
-            id=1,
-            owner_id=1,
-            first_name="Tilda",
-            last_name="Swinton",
-            email="tilda.s@example.com",
-            phone="+380923341122",
-            birthday=date(1992, 12, 10),
-        ), Contact(
-            id=2,
-            owner_id=1,
-            first_name="John",
-            last_name="Doe",
-            email="john.doe@example.com",
-            phone="+380912223344",
-            birthday=date(1990, 10, 12),
-        )]
+        contacts = [
+            Contact(
+                id=1,
+                owner_id=1,
+                first_name="Tilda",
+                last_name="Swinton",
+                email="tilda.s@example.com",
+                phone="+380923341122",
+                birthday=date(1992, 12, 10),
+            ),
+            Contact(
+                id=2,
+                owner_id=1,
+                first_name="John",
+                last_name="Doe",
+                email="john.doe@example.com",
+                phone="+380912223344",
+                birthday=date(1990, 10, 12),
+            ),
+        ]
         mocked_result = MagicMock()
         mocked_result.scalars.return_value.all.return_value = contacts
 
@@ -144,7 +147,9 @@ class TestContacts(unittest.IsolatedAsyncioTestCase):
         self.session.commit = AsyncMock()
         self.session.refresh = AsyncMock()
 
-        result = await self.test_instance.update_contact(self.user.id, contact_id=2, new_contact=contact_update)
+        result = await self.test_instance.update_contact(
+            self.user.id, contact_id=2, new_contact=contact_update
+        )
         self.assertEqual(result.first_name, contact.first_name)
         self.assertEqual(result.last_name, contact.last_name)
         self.assertEqual(result.email, contact.email)
@@ -166,23 +171,26 @@ class TestContacts(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(result, self.contact)
 
     async def test_get_upcoming_birthdays(self):
-        contacts = [Contact(
-            id=1,
-            owner_id=1,
-            first_name="Tilda",
-            last_name="Swinton",
-            email="tilda.s@example.com",
-            phone="+380923341122",
-            birthday=date(1992, 12, 10),
-        ), Contact(
-            id=2,
-            owner_id=1,
-            first_name="John",
-            last_name="Doe",
-            email="john.doe@example.com",
-            phone="+380912223344",
-            birthday=date(1990, 10, 12),
-        )]
+        contacts = [
+            Contact(
+                id=1,
+                owner_id=1,
+                first_name="Tilda",
+                last_name="Swinton",
+                email="tilda.s@example.com",
+                phone="+380923341122",
+                birthday=date(1992, 12, 10),
+            ),
+            Contact(
+                id=2,
+                owner_id=1,
+                first_name="John",
+                last_name="Doe",
+                email="john.doe@example.com",
+                phone="+380912223344",
+                birthday=date(1990, 10, 12),
+            ),
+        ]
         mocked_result = MagicMock()
         mocked_result.scalars.return_value.all.return_value = contacts
 
@@ -193,4 +201,3 @@ class TestContacts(unittest.IsolatedAsyncioTestCase):
 
         result = await self.test_instance.get_upcoming_birthdays(self.user.id)
         self.assertEqual(result, contacts)
-
