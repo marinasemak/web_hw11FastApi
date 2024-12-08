@@ -41,26 +41,502 @@ documentation for details.</p>
 <div class="toctree-wrapper compound">
 </div>
 </section>
-<section id="rest-api-main">
-<h1>REST API main<a class="headerlink" href="#rest-api-main" title="Link to this heading">¶</a></h1>
+<section id="module-main">
+<span id="rest-api-main"></span><h1>REST API main<a class="headerlink" href="#module-main" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="main.healthcheck">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">healthcheck</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#healthcheck"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.healthcheck" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="main.lifespan">
+<span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">lifespan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#lifespan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.lifespan" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="main.log_requests">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">main.</span></span><span class="sig-name descname"><span class="pre">log_requests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">call_next</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#log_requests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#main.log_requests" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </section>
-<section id="rest-api-repository-contacts">
-<h1>REST API repository Contacts<a class="headerlink" href="#rest-api-repository-contacts" title="Link to this heading">¶</a></h1>
+<section id="module-src.contacts.repos">
+<span id="rest-api-repository-contacts"></span><h1>REST API repository Contacts<a class="headerlink" href="#module-src.contacts.repos" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.contacts.repos.ContactRepository">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.contacts.repos.</span></span><span class="sig-name descname"><span class="pre">ContactRepository</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/contacts/repos.html#ContactRepository"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.contacts.repos.ContactRepository" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.contacts.repos.ContactRepository.create_contact">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contact</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">owner_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/contacts/repos.html#ContactRepository.create_contact"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.contacts.repos.ContactRepository.create_contact" title="Link to this definition">¶</a></dt>
+<dd><p>Create new contact
+:type contact: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ContactCreate</span></code></span>
+:param contact: Contact to create
+:type contact: ContactCreate
+:type owner_id: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>
+:param owner_id: User who creates contact
+:type owner_id: int
+:return: Created contact
+:rtype: Contact</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.contacts.repos.ContactRepository.get_contact">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">owner_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contact_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/contacts/repos.html#ContactRepository.get_contact"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.contacts.repos.ContactRepository.get_contact" title="Link to this definition">¶</a></dt>
+<dd><p>Get contact by id
+:type owner_id: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>
+:param owner_id: User who created contact
+:type owner_id: int
+:type contact_id: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>
+:param contact_id: Contact id
+:type contact_id: int
+:return: Contact from query
+:rtype: Contact | None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.contacts.repos.ContactRepository.get_contacts">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_contacts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">owner_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/contacts/repos.html#ContactRepository.get_contacts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.contacts.repos.ContactRepository.get_contacts" title="Link to this definition">¶</a></dt>
+<dd><p>Get list of contacts
+:type owner_id: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>
+:param owner_id: User who created contacts
+:type owner_id: int
+:type offset: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>
+:param offset: The number of contacts to skip
+:type offset: int
+:type limit: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>
+:param limit: The max number of contacts to return
+:type limit: int
+:return: Contacts from query
+:rtype: List[Contact]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.contacts.repos.ContactRepository.get_upcoming_birthdays">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_upcoming_birthdays</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">owner_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/contacts/repos.html#ContactRepository.get_upcoming_birthdays"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.contacts.repos.ContactRepository.get_upcoming_birthdays" title="Link to this definition">¶</a></dt>
+<dd><p>Selects list of contacts who’s upcoming birthdays within 7 days
+:type owner_id: 
+:param owner_id: User who created contacts
+:type owner_id: int
+:return: List of contacts
+:rtype: List[Contact]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.contacts.repos.ContactRepository.remove_contact">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">remove_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">owner_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contact_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/contacts/repos.html#ContactRepository.remove_contact"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.contacts.repos.ContactRepository.remove_contact" title="Link to this definition">¶</a></dt>
+<dd><p>Remove contact
+:type owner_id: 
+:param owner_id: User who created contact
+:type owner_id: int
+:type contact_id: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>
+:param contact_id: Id of contact to remove
+:type contact_id: int
+:return: Removed contact
+:rtype: Contact | None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.contacts.repos.ContactRepository.search_contacts">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">search_contacts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">owner_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/contacts/repos.html#ContactRepository.search_contacts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.contacts.repos.ContactRepository.search_contacts" title="Link to this definition">¶</a></dt>
+<dd><p>Search contacts by first name or last name or email
+:type owner_id: 
+:param owner_id: User who created contacts
+:type owner_id: int
+:type param: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>
+:param param: First name or last name or email to search by
+:type param: str
+:return: Contacts from query
+:rtype: List[Contact]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.contacts.repos.ContactRepository.update_contact">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">owner_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contact_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_contact</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/contacts/repos.html#ContactRepository.update_contact"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.contacts.repos.ContactRepository.update_contact" title="Link to this definition">¶</a></dt>
+<dd><p>Update contact
+:type owner_id: 
+:param owner_id: User who created contact
+:type owner_id: int
+:type contact_id: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>
+:param contact_id: Id of contact to update
+:type contact_id: int
+:type new_contact: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ContactUpdate</span></code></span>
+:param new_contact: Contact data to update
+:type contact_id: ContactUpdate
+:return: Updated contact
+:rtype: Contact | None</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="rest-api-repository-auth">
-<h1>REST API repository Auth<a class="headerlink" href="#rest-api-repository-auth" title="Link to this heading">¶</a></h1>
+<section id="module-src.auth.repos">
+<span id="rest-api-repository-auth"></span><h1>REST API repository Auth<a class="headerlink" href="#module-src.auth.repos" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.auth.repos.UserRepository">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.auth.repos.</span></span><span class="sig-name descname"><span class="pre">UserRepository</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/auth/repos.html#UserRepository"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.auth.repos.UserRepository" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.auth.repos.UserRepository.activate_user">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">activate_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/auth/repos.html#UserRepository.activate_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.auth.repos.UserRepository.activate_user" title="Link to this definition">¶</a></dt>
+<dd><p>Activates created user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>user</strong> (<em>User</em>) – The user to activate.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.auth.repos.UserRepository.create_user">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_create</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/auth/repos.html#UserRepository.create_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.auth.repos.UserRepository.create_user" title="Link to this definition">¶</a></dt>
+<dd><p>Creates new user in db</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>user_create</strong> (<em>UserCreate</em>) – The user to create.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Created user</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>User</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.auth.repos.UserRepository.get_user_by_email">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_user_by_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/auth/repos.html#UserRepository.get_user_by_email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.auth.repos.UserRepository.get_user_by_email" title="Link to this definition">¶</a></dt>
+<dd><p>Find user by email in db</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>email</strong> (<em>str</em>) – User email.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>User with specified email</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>User | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.auth.repos.UserRepository.update_avatar">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_avatar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/auth/repos.html#UserRepository.update_avatar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.auth.repos.UserRepository.update_avatar" title="Link to this definition">¶</a></dt>
+<dd><p>Update user avatar
+:type email: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>
+:param email: User email.
+:type email: str
+:type url: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">URL</span></code></span>
+:param url: Url with generated user avatar
+:type url: URL
+:return: User with updated avatar
+:rtype: User</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="rest-api-routes-contacts">
-<h1>REST API routes Contacts<a class="headerlink" href="#rest-api-routes-contacts" title="Link to this heading">¶</a></h1>
+<section id="module-src.contacts.routes">
+<span id="rest-api-routes-contacts"></span><h1>REST API routes Contacts<a class="headerlink" href="#module-src.contacts.routes" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.contacts.routes.create_contact">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.contacts.routes.</span></span><span class="sig-name descname"><span class="pre">create_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contact</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/contacts/routes.html#create_contact"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.contacts.routes.create_contact" title="Link to this definition">¶</a></dt>
+<dd><p>Request to create new contact
+:type contact: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ContactCreate</span></code></span>
+:param contact: Contact to create
+:type contact: ContactCreate
+:type user: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></span>
+:param user: The user to create contacts for
+:type user: User
+:type db: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncSession</span></code></span>
+:param db: The database session
+:type db: Session
+:return: Created contact
+:rtype: ContactResponse</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.contacts.routes.delete_contact">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.contacts.routes.</span></span><span class="sig-name descname"><span class="pre">delete_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contact_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/contacts/routes.html#delete_contact"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.contacts.routes.delete_contact" title="Link to this definition">¶</a></dt>
+<dd><p>Remove contact
+:type contact_id: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>
+:param contact_id: Id of contact to remove
+:type contact_id: int
+:type user: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></span>
+:param user: User who created contact
+:type user: int
+:type db: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncSession</span></code></span>
+:param db: The database session
+:type db: Session
+:return: Removed contact
+:rtype: ContactResponse | None</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.contacts.routes.get_contact">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.contacts.routes.</span></span><span class="sig-name descname"><span class="pre">get_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contact_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/contacts/routes.html#get_contact"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.contacts.routes.get_contact" title="Link to this definition">¶</a></dt>
+<dd><p>Get contact by id
+:type contact_id: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>
+:param contact_id: Contact id
+:type contact_id: int
+:type user: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></span>
+:param user: User who created contact
+:type user: User
+:type db: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncSession</span></code></span>
+:param db: The database session
+:type db: Session
+:return: Contact from query
+:rtype: Contact | None</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.contacts.routes.get_contacts">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.contacts.routes.</span></span><span class="sig-name descname"><span class="pre">get_contacts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Query(10)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/contacts/routes.html#get_contacts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.contacts.routes.get_contacts" title="Link to this definition">¶</a></dt>
+<dd><p>Request to get list of contacts with specified offset and limit
+:type offset: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>
+:param offset: The number of contacts to skip
+:type offset: int
+:type limit: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>
+:param limit: The max number of contacts to return
+:type limit: int
+:type user: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></span>
+:param user: The user to get contacts for
+:type user: User
+:type db: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncSession</span></code></span>
+:param db: The database session
+:type db: Session
+:return: List of contacts
+:rtype: List[ContactResponse]</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.contacts.routes.get_upcoming_birthdays">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.contacts.routes.</span></span><span class="sig-name descname"><span class="pre">get_upcoming_birthdays</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/contacts/routes.html#get_upcoming_birthdays"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.contacts.routes.get_upcoming_birthdays" title="Link to this definition">¶</a></dt>
+<dd><p>Gives the list of contacts with upcoming birthdays within the next 7 days
+:type user: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></span>
+:param user: User who created contacts
+:type user: User
+:type db: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncSession</span></code></span>
+:param db: The database session
+:type db: Session
+:return: List of contacts
+:rtype: List[ContactResponse]</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.contacts.routes.search_contact">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.contacts.routes.</span></span><span class="sig-name descname"><span class="pre">search_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Query(PydanticUndefined)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/contacts/routes.html#search_contact"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.contacts.routes.search_contact" title="Link to this definition">¶</a></dt>
+<dd><p>Search contacts by first name or last name or email
+:type param: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>
+:param param: First name or last name or email to search by
+:type param: str
+:type user: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></span>
+:param user: User who created contacts
+:type user: User
+:type db: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncSession</span></code></span>
+:param db: The database session
+:type db: Session
+:return: Searched contact
+:rtype: ContactResponse</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.contacts.routes.unexpected_exception_handler">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.contacts.routes.</span></span><span class="sig-name descname"><span class="pre">unexpected_exception_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/contacts/routes.html#unexpected_exception_handler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.contacts.routes.unexpected_exception_handler" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.contacts.routes.update_contact">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.contacts.routes.</span></span><span class="sig-name descname"><span class="pre">update_contact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contact_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contact</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/contacts/routes.html#update_contact"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.contacts.routes.update_contact" title="Link to this definition">¶</a></dt>
+<dd><p>Update contact
+:type contact_id: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>
+:param contact_id: Id of contact to update
+:type contact_id: int
+:type contact: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ContactUpdate</span></code></span>
+:param contact: Contact data to update
+:type contact: ContactUpdate
+:type user: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></span>
+:param user: User who created contact
+:type user: int
+:type db: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncSession</span></code></span>
+:param db: The database session
+:type db: Session
+:return: Updated contact
+:rtype: ContactResponse | None</p>
+</dd></dl>
+
 </section>
-<section id="rest-api-routes-users">
-<h1>REST API routes Users<a class="headerlink" href="#rest-api-routes-users" title="Link to this heading">¶</a></h1>
+<section id="module-src.users.routes">
+<span id="rest-api-routes-users"></span><h1>REST API routes Users<a class="headerlink" href="#module-src.users.routes" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.users.routes.get_current_user_info">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.users.routes.</span></span><span class="sig-name descname"><span class="pre">get_current_user_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">current_user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/users/routes.html#get_current_user_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.users.routes.get_current_user_info" title="Link to this definition">¶</a></dt>
+<dd><p>Request to show account of current user
+:type current_user: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></span>
+:param current_user: The user who makes request
+:type current_user: User
+:type db: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncSession</span></code></span>
+:param db: The database session
+:type db: Session
+:return: Current user info
+:rtype: UserResponse</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.users.routes.update_avatar">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.users.routes.</span></span><span class="sig-name descname"><span class="pre">update_avatar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">File(PydanticUndefined)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(get_current_user)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/users/routes.html#update_avatar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.users.routes.update_avatar" title="Link to this definition">¶</a></dt>
+<dd><p>Request to update avatar of current user
+:type file: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">UploadFile</span></code></span>
+:param file: Image file to upload
+:type file: UploadFile
+:type current_user: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></span>
+:param current_user: Current user to update avatar for
+:type current_user: User
+:type db: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncSession</span></code></span>
+:param db: The database session
+:type db: Session
+:return: User info with updated avatar link from db
+:rtype: UserResponse</p>
+</dd></dl>
+
 </section>
-<section id="rest-api-routes-auth">
-<h1>REST API routes Auth<a class="headerlink" href="#rest-api-routes-auth" title="Link to this heading">¶</a></h1>
+<section id="module-src.auth.routes">
+<span id="rest-api-routes-auth"></span><h1>REST API routes Auth<a class="headerlink" href="#module-src.auth.routes" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.auth.routes.login_for_access_token">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.auth.routes.</span></span><span class="sig-name descname"><span class="pre">login_for_access_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(NoneType)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/auth/routes.html#login_for_access_token"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.auth.routes.login_for_access_token" title="Link to this definition">¶</a></dt>
+<dd><p>User authentication
+:type form_data: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">OAuth2PasswordRequestForm</span></code></span>
+:param form_data: User credentials
+:type form_data: OAuth2PasswordRequestForm
+:type db: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncSession</span></code></span>
+:param db: The database session
+:type db: Session
+:return: Token: authentication (login) token, refresh token
+:rtype: str</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.auth.routes.refresh_tokens">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.auth.routes.</span></span><span class="sig-name descname"><span class="pre">refresh_tokens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">refresh_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/auth/routes.html#refresh_tokens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.auth.routes.refresh_tokens" title="Link to this definition">¶</a></dt>
+<dd><p>Refresh login token
+:type refresh_token: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>
+:param refresh_token: Token form login request to refresh login token
+:type refresh_token: str
+:type db: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncSession</span></code></span>
+:param db: The database session
+:type db: Session
+:return: Token: New authentication (login) token, new refresh token
+:rtype: str</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.auth.routes.register">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.auth.routes.</span></span><span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_create</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background_tasks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/auth/routes.html#register"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.auth.routes.register" title="Link to this definition">¶</a></dt>
+<dd><p>Register new user
+:type user_create: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserCreate</span></code></span>
+:param user_create: New user to register
+:type user_create: UserCreate
+:type background_tasks: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">BackgroundTasks</span></code></span>
+:param background_tasks: Send verification email
+:type background_tasks: BackgroundTasks
+:type request: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Request</span></code></span>
+:param request: Gets base url to create verification link
+:type request: Request
+:type db: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncSession</span></code></span>
+:param db: The database session
+:type db: Session
+:return: Registered user
+:rtype: UserResponse</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.auth.routes.verify_email">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.auth.routes.</span></span><span class="sig-name descname"><span class="pre">verify_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/auth/routes.html#verify_email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.auth.routes.verify_email" title="Link to this definition">¶</a></dt>
+<dd><p>Verify user email
+:type token: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>
+:param token: token wich verified user email and set it as active
+:type token: str
+:type db: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncSession</span></code></span>
+:param db: The database session
+:type db: Session
+:return: Success message
+:rtype: str</p>
+</dd></dl>
+
 </section>
 <section id="id1">
 <h1>REST API routes Auth<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<dl class="py function" id="module-src.auth.utils">
+<dt class="sig sig-object py" id="src.auth.utils.create_access_token">
+<span class="sig-prename descclassname"><span class="pre">src.auth.utils.</span></span><span class="sig-name descname"><span class="pre">create_access_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/auth/utils.html#create_access_token"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.auth.utils.create_access_token" title="Link to this definition">¶</a></dt>
+<dd><p>Create token to get access
+:type data: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></span>
+:param data: Username (email)
+:type data: dict
+:return: Encoded jwt token
+:rtype: str</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.auth.utils.create_refresh_token">
+<span class="sig-prename descclassname"><span class="pre">src.auth.utils.</span></span><span class="sig-name descname"><span class="pre">create_refresh_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/auth/utils.html#create_refresh_token"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.auth.utils.create_refresh_token" title="Link to this definition">¶</a></dt>
+<dd><p>Create refresh token
+:type data: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></span>
+:param data: Username (email)
+:type data: dict
+:return: Encoded jwt token
+:rtype: str</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.auth.utils.create_verification_token">
+<span class="sig-prename descclassname"><span class="pre">src.auth.utils.</span></span><span class="sig-name descname"><span class="pre">create_verification_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/auth/utils.html#create_verification_token"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.auth.utils.create_verification_token" title="Link to this definition">¶</a></dt>
+<dd><p>Create encoded token for user verification from user email and secret key
+:type email: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmailStr</span></code></span>
+:param email: User email
+:type email: EmailStr
+:return: Encoded jwt token
+:rtype: str</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.auth.utils.decode_access_token">
+<span class="sig-prename descclassname"><span class="pre">src.auth.utils.</span></span><span class="sig-name descname"><span class="pre">decode_access_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/auth/utils.html#decode_access_token"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.auth.utils.decode_access_token" title="Link to this definition">¶</a></dt>
+<dd><p>Decode access token
+:type token: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>
+:param token: Token to decode
+:type token: str
+:return: User email from token if exists
+:rtype: TokenData | None</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.auth.utils.decode_verification_token">
+<span class="sig-prename descclassname"><span class="pre">src.auth.utils.</span></span><span class="sig-name descname"><span class="pre">decode_verification_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/auth/utils.html#decode_verification_token"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.auth.utils.decode_verification_token" title="Link to this definition">¶</a></dt>
+<dd><p>Decode verification token
+:type token: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>
+:param token: Token to verify
+:type token: str
+:return: User email or None
+:rtype: str | None</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.auth.utils.get_current_user">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.auth.utils.</span></span><span class="sig-name descname"><span class="pre">get_current_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(OAuth2PasswordBearer)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Depends(get_db)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/auth/utils.html#get_current_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.auth.utils.get_current_user" title="Link to this definition">¶</a></dt>
+<dd><p>Find user with token in db
+:type token: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>
+:param token: User token
+:type token: str
+:type db: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncSession</span></code></span>
+:param db: The database session
+:type db: Session
+:return: User from db
+:rtype: User</p>
+</dd></dl>
+
 </section>
 <section id="module-src.auth.pass_utils">
 <span id="rest-api-routes-passwords"></span><h1>REST API routes Passwords<a class="headerlink" href="#module-src.auth.pass_utils" title="Link to this heading">¶</a></h1>
@@ -90,8 +566,37 @@ documentation for details.</p>
 </dd></dl>
 
 </section>
-<section id="rest-api-routes-emails">
-<h1>REST API routes Emails<a class="headerlink" href="#rest-api-routes-emails" title="Link to this heading">¶</a></h1>
+<section id="module-src.auth.mail_utils">
+<span id="rest-api-routes-emails"></span><h1>REST API routes Emails<a class="headerlink" href="#module-src.auth.mail_utils" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.auth.mail_utils.EmailSchema">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.auth.mail_utils.</span></span><span class="sig-name descname"><span class="pre">EmailSchema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/auth/mail_utils.html#EmailSchema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.auth.mail_utils.EmailSchema" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.auth.mail_utils.EmailSchema.email">
+<span class="sig-name descname"><span class="pre">email</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">EmailStr</span></code></em><a class="headerlink" href="#src.auth.mail_utils.EmailSchema.email" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.auth.mail_utils.EmailSchema.model_config">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar[ConfigDict]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#src.auth.mail_utils.EmailSchema.model_config" title="Link to this definition">¶</a></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.auth.mail_utils.send_verification_email">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.auth.mail_utils.</span></span><span class="sig-name descname"><span class="pre">send_verification_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/auth/mail_utils.html#send_verification_email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.auth.mail_utils.send_verification_email" title="Link to this definition">¶</a></dt>
+<dd><p>Send email to created user with verification token
+:type email: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmailStr</span></code></span>
+:param email: User email.
+:type email: EmailStr
+:type host: <span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">URL</span></code></span>
+:param host: Host for validation link
+:type host: URL</p>
+</dd></dl>
+
 </section>
 
 
@@ -105,19 +610,81 @@ documentation for details.</p>
     <h3><a href="#">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">Rest Api documentation</a></li>
-<li><a class="reference internal" href="#rest-api-main">REST API main</a></li>
-<li><a class="reference internal" href="#rest-api-repository-contacts">REST API repository Contacts</a></li>
-<li><a class="reference internal" href="#rest-api-repository-auth">REST API repository Auth</a></li>
-<li><a class="reference internal" href="#rest-api-routes-contacts">REST API routes Contacts</a></li>
-<li><a class="reference internal" href="#rest-api-routes-users">REST API routes Users</a></li>
-<li><a class="reference internal" href="#rest-api-routes-auth">REST API routes Auth</a></li>
-<li><a class="reference internal" href="#id1">REST API routes Auth</a></li>
+<li><a class="reference internal" href="#module-main">REST API main</a><ul>
+<li><a class="reference internal" href="#main.healthcheck"><code class="docutils literal notranslate"><span class="pre">healthcheck()</span></code></a></li>
+<li><a class="reference internal" href="#main.lifespan"><code class="docutils literal notranslate"><span class="pre">lifespan()</span></code></a></li>
+<li><a class="reference internal" href="#main.log_requests"><code class="docutils literal notranslate"><span class="pre">log_requests()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.contacts.repos">REST API repository Contacts</a><ul>
+<li><a class="reference internal" href="#src.contacts.repos.ContactRepository"><code class="docutils literal notranslate"><span class="pre">ContactRepository</span></code></a><ul>
+<li><a class="reference internal" href="#src.contacts.repos.ContactRepository.create_contact"><code class="docutils literal notranslate"><span class="pre">ContactRepository.create_contact()</span></code></a></li>
+<li><a class="reference internal" href="#src.contacts.repos.ContactRepository.get_contact"><code class="docutils literal notranslate"><span class="pre">ContactRepository.get_contact()</span></code></a></li>
+<li><a class="reference internal" href="#src.contacts.repos.ContactRepository.get_contacts"><code class="docutils literal notranslate"><span class="pre">ContactRepository.get_contacts()</span></code></a></li>
+<li><a class="reference internal" href="#src.contacts.repos.ContactRepository.get_upcoming_birthdays"><code class="docutils literal notranslate"><span class="pre">ContactRepository.get_upcoming_birthdays()</span></code></a></li>
+<li><a class="reference internal" href="#src.contacts.repos.ContactRepository.remove_contact"><code class="docutils literal notranslate"><span class="pre">ContactRepository.remove_contact()</span></code></a></li>
+<li><a class="reference internal" href="#src.contacts.repos.ContactRepository.search_contacts"><code class="docutils literal notranslate"><span class="pre">ContactRepository.search_contacts()</span></code></a></li>
+<li><a class="reference internal" href="#src.contacts.repos.ContactRepository.update_contact"><code class="docutils literal notranslate"><span class="pre">ContactRepository.update_contact()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.auth.repos">REST API repository Auth</a><ul>
+<li><a class="reference internal" href="#src.auth.repos.UserRepository"><code class="docutils literal notranslate"><span class="pre">UserRepository</span></code></a><ul>
+<li><a class="reference internal" href="#src.auth.repos.UserRepository.activate_user"><code class="docutils literal notranslate"><span class="pre">UserRepository.activate_user()</span></code></a></li>
+<li><a class="reference internal" href="#src.auth.repos.UserRepository.create_user"><code class="docutils literal notranslate"><span class="pre">UserRepository.create_user()</span></code></a></li>
+<li><a class="reference internal" href="#src.auth.repos.UserRepository.get_user_by_email"><code class="docutils literal notranslate"><span class="pre">UserRepository.get_user_by_email()</span></code></a></li>
+<li><a class="reference internal" href="#src.auth.repos.UserRepository.update_avatar"><code class="docutils literal notranslate"><span class="pre">UserRepository.update_avatar()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.contacts.routes">REST API routes Contacts</a><ul>
+<li><a class="reference internal" href="#src.contacts.routes.create_contact"><code class="docutils literal notranslate"><span class="pre">create_contact()</span></code></a></li>
+<li><a class="reference internal" href="#src.contacts.routes.delete_contact"><code class="docutils literal notranslate"><span class="pre">delete_contact()</span></code></a></li>
+<li><a class="reference internal" href="#src.contacts.routes.get_contact"><code class="docutils literal notranslate"><span class="pre">get_contact()</span></code></a></li>
+<li><a class="reference internal" href="#src.contacts.routes.get_contacts"><code class="docutils literal notranslate"><span class="pre">get_contacts()</span></code></a></li>
+<li><a class="reference internal" href="#src.contacts.routes.get_upcoming_birthdays"><code class="docutils literal notranslate"><span class="pre">get_upcoming_birthdays()</span></code></a></li>
+<li><a class="reference internal" href="#src.contacts.routes.search_contact"><code class="docutils literal notranslate"><span class="pre">search_contact()</span></code></a></li>
+<li><a class="reference internal" href="#src.contacts.routes.unexpected_exception_handler"><code class="docutils literal notranslate"><span class="pre">unexpected_exception_handler()</span></code></a></li>
+<li><a class="reference internal" href="#src.contacts.routes.update_contact"><code class="docutils literal notranslate"><span class="pre">update_contact()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.users.routes">REST API routes Users</a><ul>
+<li><a class="reference internal" href="#src.users.routes.get_current_user_info"><code class="docutils literal notranslate"><span class="pre">get_current_user_info()</span></code></a></li>
+<li><a class="reference internal" href="#src.users.routes.update_avatar"><code class="docutils literal notranslate"><span class="pre">update_avatar()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.auth.routes">REST API routes Auth</a><ul>
+<li><a class="reference internal" href="#src.auth.routes.login_for_access_token"><code class="docutils literal notranslate"><span class="pre">login_for_access_token()</span></code></a></li>
+<li><a class="reference internal" href="#src.auth.routes.refresh_tokens"><code class="docutils literal notranslate"><span class="pre">refresh_tokens()</span></code></a></li>
+<li><a class="reference internal" href="#src.auth.routes.register"><code class="docutils literal notranslate"><span class="pre">register()</span></code></a></li>
+<li><a class="reference internal" href="#src.auth.routes.verify_email"><code class="docutils literal notranslate"><span class="pre">verify_email()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">REST API routes Auth</a><ul>
+<li><a class="reference internal" href="#src.auth.utils.create_access_token"><code class="docutils literal notranslate"><span class="pre">create_access_token()</span></code></a></li>
+<li><a class="reference internal" href="#src.auth.utils.create_refresh_token"><code class="docutils literal notranslate"><span class="pre">create_refresh_token()</span></code></a></li>
+<li><a class="reference internal" href="#src.auth.utils.create_verification_token"><code class="docutils literal notranslate"><span class="pre">create_verification_token()</span></code></a></li>
+<li><a class="reference internal" href="#src.auth.utils.decode_access_token"><code class="docutils literal notranslate"><span class="pre">decode_access_token()</span></code></a></li>
+<li><a class="reference internal" href="#src.auth.utils.decode_verification_token"><code class="docutils literal notranslate"><span class="pre">decode_verification_token()</span></code></a></li>
+<li><a class="reference internal" href="#src.auth.utils.get_current_user"><code class="docutils literal notranslate"><span class="pre">get_current_user()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-src.auth.pass_utils">REST API routes Passwords</a><ul>
 <li><a class="reference internal" href="#src.auth.pass_utils.get_password_hash"><code class="docutils literal notranslate"><span class="pre">get_password_hash()</span></code></a></li>
 <li><a class="reference internal" href="#src.auth.pass_utils.verify_password"><code class="docutils literal notranslate"><span class="pre">verify_password()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#rest-api-routes-emails">REST API routes Emails</a></li>
+<li><a class="reference internal" href="#module-src.auth.mail_utils">REST API routes Emails</a><ul>
+<li><a class="reference internal" href="#src.auth.mail_utils.EmailSchema"><code class="docutils literal notranslate"><span class="pre">EmailSchema</span></code></a><ul>
+<li><a class="reference internal" href="#src.auth.mail_utils.EmailSchema.email"><code class="docutils literal notranslate"><span class="pre">EmailSchema.email</span></code></a></li>
+<li><a class="reference internal" href="#src.auth.mail_utils.EmailSchema.model_config"><code class="docutils literal notranslate"><span class="pre">EmailSchema.model_config</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#src.auth.mail_utils.send_verification_email"><code class="docutils literal notranslate"><span class="pre">send_verification_email()</span></code></a></li>
+</ul>
+</li>
 </ul>
 
   </div>
